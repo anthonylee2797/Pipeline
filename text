@@ -1,0 +1,17 @@
+users = {
+  user_id
+  username
+  password
+}
+
+
+// Mongo
+user = {
+  user_id
+  username
+  password
+  jobs: [
+    {...},
+    { amazon ...}
+  ]
+}
