@@ -15,7 +15,7 @@ export function setJobs() {
 
 export function JobProvider({ children }) {
   const [jobs, setJobs] = useState([
-    { company: 'Amazon', status: 'Applied', id: uuid() },
+    { company: 'Amazon', status: 'Rejected', id: uuid() },
     { company: 'Microsoft', status: 'Applied', id: uuid() },
     { company: 'Apple', status: 'Applied', id: uuid() },
   ]);

@@ -12,23 +12,30 @@ const Pipeline = () => {
   const jobs = useJob();
   const setJobss = setJobs();
 
+  function addJob(e: any) {
+    e.preventDefault();
+    let company = companyNameEl.current.value;
+    setJobss(jobs.concat({ company: company, status: 'Applied', id: uuid() }));
+  }
+
   return (
     <div className="main-container">
-      <Column class="column" columnName="Applied">
+      <div className='main-container-columns'>
+      <Column columnName="Applied">
         {jobs
           .filter((el: any) => el.status === 'Applied')
           .map((el: any) => (
             <Job status={el.status} company={el.company} id={el.id} />
           ))}
       </Column>
-      <Column class="column" columnName="Phone">
+      <Column columnName="Phone">
         {jobs
           .filter((el: any) => el.status === 'Phone')
           .map((el: any) => (
             <Job status={el.status} company={el.company} id={el.id} />
           ))}
       </Column>
-      <Column class="column" columnName="ON SITE">
+      <Column columnName="ON SITE">
         {jobs
           .filter((el: any) => el.status === 'ON SITE')
           .map((el: any) => (
@@ -36,28 +43,23 @@ const Pipeline = () => {
           ))}
       </Column>
 
-      <Column class="column" columnName="Offer">
+      <Column columnName="Offer">
         {jobs
           .filter((el: any) => el.status === 'OFFER')
           .map((el: any) => (
             <Job status={el.status} company={el.company} id={el.id} />
           ))}
       </Column>
-      <Column class="column" columnName="Rejected">
+      <Column columnName="Rejected">
         {jobs
           .filter((el: any) => el.status === 'Rejected')
           .map((el: any) => (
             <Job status={el.status} company={el.company} id={el.id} />
           ))}
       </Column>
+      </div>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          let company = companyNameEl.current.value;
-          setJobss(jobs.concat({ company: company, status: 'Applied', id: uuid() }));
-        }}
-      >
+      <form onSubmit={addJob}>
         <label>Company Name: </label>
         <input type="text" ref={companyNameEl}></input>
         <button type="submit">Add Application</button>

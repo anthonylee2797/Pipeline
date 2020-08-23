@@ -7,6 +7,6 @@ import App from './components/App';
 
 // uncomment so that webpack can bundle styles
 
-// import './scss/main.scss';
+import './styles/main.scss';
 
 render(<App />, document.getElementById('root'));

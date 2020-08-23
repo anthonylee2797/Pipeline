@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const Column = (props: any) => (
+interface props {
+  columnName: string;
+  children: React.ReactNode;
+}
+
+const Column = ({ columnName, children }: props) => (
   <div>
     <h1>
-      ColumnName: {props.columnName} {props.children}
+      ColumnName: {columnName} {children}
     </h1>
   </div>
 );
