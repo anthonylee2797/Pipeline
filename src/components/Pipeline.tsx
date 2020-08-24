@@ -20,43 +20,43 @@ const Pipeline = () => {
 
   return (
     <div className="main-container">
-      <div className='main-container-columns'>
-      <Column columnName="Applied">
-        {jobs
-          .filter((el: any) => el.status === 'Applied')
-          .map((el: any) => (
-            <Job status={el.status} company={el.company} id={el.id} />
-          ))}
-      </Column>
-      <Column columnName="Phone">
-        {jobs
-          .filter((el: any) => el.status === 'Phone')
-          .map((el: any) => (
-            <Job status={el.status} company={el.company} id={el.id} />
-          ))}
-      </Column>
-      <Column columnName="ON SITE">
-        {jobs
-          .filter((el: any) => el.status === 'ON SITE')
-          .map((el: any) => (
-            <Job status={el.status} company={el.company} id={el.id} />
-          ))}
-      </Column>
+      <div className="main-container-columns">
+        <Column columnName="Applied">
+          {jobs
+            .filter((el: any) => el.status === 'Applied')
+            .map((el: any) => (
+              <Job status={el.status} company={el.company} id={el.id} />
+            ))}
+        </Column>
+        <Column columnName="Phone">
+          {jobs
+            .filter((el: any) => el.status === 'Phone')
+            .map((el: any) => (
+              <Job status={el.status} company={el.company} id={el.id} />
+            ))}
+        </Column>
+        <Column columnName="ON SITE">
+          {jobs
+            .filter((el: any) => el.status === 'ON SITE')
+            .map((el: any) => (
+              <Job status={el.status} company={el.company} id={el.id} />
+            ))}
+        </Column>
 
-      <Column columnName="Offer">
-        {jobs
-          .filter((el: any) => el.status === 'OFFER')
-          .map((el: any) => (
-            <Job status={el.status} company={el.company} id={el.id} />
-          ))}
-      </Column>
-      <Column columnName="Rejected">
-        {jobs
-          .filter((el: any) => el.status === 'Rejected')
-          .map((el: any) => (
-            <Job status={el.status} company={el.company} id={el.id} />
-          ))}
-      </Column>
+        <Column columnName="Offer">
+          {jobs
+            .filter((el: any) => el.status === 'Offer')
+            .map((el: any) => (
+              <Job status={el.status} company={el.company} id={el.id} />
+            ))}
+        </Column>
+        <Column columnName="Rejected">
+          {jobs
+            .filter((el: any) => el.status === 'Rejected')
+            .map((el: any) => (
+              <Job status={el.status} company={el.company} id={el.id} />
+            ))}
+        </Column>
       </div>
 
       <form onSubmit={addJob}>
