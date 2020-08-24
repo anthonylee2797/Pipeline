@@ -13,6 +13,10 @@ const JobComponent = styled('div')`
   text-align: center;
   border: 1px solid;
   cursor: pointer;
+  width: 80%;
+  padding: 2px;
+  backgroundcolor: blue;
+  height: 100%;
 `;
 
 interface Props {

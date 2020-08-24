@@ -9,7 +9,8 @@ const Wrapper = styled.div<{ color?: string }>`
   border: 1px solid black;
   width: 15%;
   text-align: center;
-  background: blue;
+  background: ${(prop) => (prop.lightUp ? '#4a4a4a' : 'red')};
+  transition: 0.2s;
 `;
 
 const ItemTypes = {
@@ -44,7 +45,7 @@ const Column = ({ columnName, children }: props) => {
   }
 
   return (
-    <Wrapper ref={drop}>
+    <Wrapper lightUp={isOver} ref={drop}>
       <h1>
         {columnName} {children}
       </h1>

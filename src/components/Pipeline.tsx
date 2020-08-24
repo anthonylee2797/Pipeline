@@ -15,7 +15,7 @@ const Pipeline = () => {
   function addJob(e: any) {
     e.preventDefault();
     let company = companyNameEl.current.value;
-    setJobss(jobs.concat({ company: company, status: 'Applied', id: uuid() }));
+    setJobss(jobs.concat({ company: company, status: 'Applied', id: uuid()}));
   }
 
   return (
