@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState, createContext } from 'react';
 import Pipeline from './Pipeline';
+import Stats from './Stats';
 import { JobProvider } from '../Context/JobContext';
 
 const App = () => {
   return (
     <JobProvider>
-      <h1>Insert Nav Bar</h1>
+      <Stats />
       <Pipeline />
     </JobProvider>
   );

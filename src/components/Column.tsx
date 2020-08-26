@@ -3,15 +3,20 @@ import styled from 'styled-components';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { useJob, setJobs } from '../Context/JobContext';
 
-const Wrapper = styled.div<{ color?: string }>`
-  margin: 2%;
+const Wrapper = styled.div<OtherDataWrapperType>`
   height: 100vh;
-  border: 1px solid black;
-  width: 15%;
+  border-left: 2px solid #ece9f2;
+  border-top: 2px solid #ece9f2;
+  margin-top: 10px;
+  width: 20%;
   text-align: center;
-  background: ${(prop) => (prop.lightUp ? '#4a4a4a' : 'red')};
+  background: ${(props) => (props.lightUp ? 'rgb(250, 300, 255)' : 'rgb(250, 249, 255)')};
   transition: 0.2s;
 `;
+
+type OtherDataWrapperType = {
+  lightUp?: boolean;
+};
 
 const ItemTypes = {
   CARD: 'card',
@@ -19,7 +24,7 @@ const ItemTypes = {
 
 interface props {
   columnName: string;
-  children: React.ReactNode;
+  children: any;
 }
 
 const Column = ({ columnName, children }: props) => {
@@ -47,7 +52,7 @@ const Column = ({ columnName, children }: props) => {
   return (
     <Wrapper lightUp={isOver} ref={drop}>
       <h1>
-        {columnName} {children}
+        {columnName} <h5 className="gray">{children.length} Jobs</h5> {children}
       </h1>
     </Wrapper>
   );

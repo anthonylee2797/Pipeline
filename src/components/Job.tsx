@@ -9,23 +9,27 @@ const ItemTypes = {
 };
 
 const JobComponent = styled('div')`
-  color: green;
+  color: black;
   text-align: center;
-  border: 1px solid;
+  border-radius: 10px;
   cursor: pointer;
   width: 80%;
   padding: 2px;
-  backgroundcolor: blue;
+  background-color: ${(props) => props.color};
   height: 100%;
+  margin: 10px auto;
+  font-size: 15px;
 `;
 
 interface Props {
   company: string;
   status: string;
   id: any;
+  role: string;
+  color: any;
 }
 
-const Job = ({ company, status, id }: Props) => {
+const Job = ({ company, status, id, role, color }: Props) => {
   // const jobs = useJob();
   // const setJobss = setJobs();
 
@@ -39,7 +43,12 @@ const Job = ({ company, status, id }: Props) => {
     }),
   });
 
-  return <JobComponent ref={drag}>Names: {company}</JobComponent>;
+  return (
+    <JobComponent color={color} ref={drag}>
+      <h3>Company: {company}</h3>
+      <h3>Role: {role}</h3>
+    </JobComponent>
+  );
 };
 
 export default Job;

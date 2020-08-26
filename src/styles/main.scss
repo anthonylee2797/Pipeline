@@ -1,5 +1,53 @@
+* {
+  margin: auto;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#root {
+  background-color: rgb(250, 249, 255);
+}
+
 .main-container-columns {
   display: flex;
 }
 
+.app-form {
+  position: absolute;
+  left: 0%;
+  top: 1%;
+  text-align: center;
+  width: 20%;
+  border-radius: 8px;
+}
 
+.app-form input {
+  display: block;
+  width: 70%;
+  color: black;
+  margin: 5px auto;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.app-form button {
+  display: block;
+  width: 73%;
+  color: black;
+  border-style: none;
+  border: thin 1px black;
+  padding: 3px;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #e5eaf5;
+
+  &:hover {
+    color: rgb(235, 15, 15);
+    transition: 0.3s;
+  }
+}
+
+.gray {
+  color: rgba(25, 4, 69, 0.4);
+}
