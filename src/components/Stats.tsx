@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StatComponent = styled('div')`
   width: 50%;
   text-align: center;
-  color: red;
+  color: black;
 `;
 
 const Stats = () => (

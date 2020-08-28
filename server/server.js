@@ -5,44 +5,21 @@ const PORT = 3000;
 
 app.use(express.json());
 
-// app.post('/login');
+app.use('/build', express.static(path.join(__dirname, '../build')));
 
-// app.get('/getJobs');
-
-// app.post('/createJob');
-
-// [
-//   id: sdjf829efj98sdfj,
-//   {
-//     name: 'amazon',
-//     uuid:
-//     status: 'completed'
-//   },
-//   {
-//     name: 'google',
-//     status: 'completed'
-//   },
-//   {
-//     name: 'google',
-//     status: 'completed'
-//   }
-//   {
-//     name: 'bestbuy',
-//     status: 'completed'
-//   }
-// ]
-
-// createJob w/ name -> find user -> iterate user's jobs key -> look for id -> delete by the name
-
-// fetch('/createJob', {
-//   method: 'POST',
-//   headers: { 'Content-Type': 'application/json' },
-//   body: JSON.stringify(name),
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../build/index.html'));
 // });
 
-// app.delete('/deleteJob/:id');
+const feedController = require('./controllers/feedController');
 
-app.use('/build', express.static(path.join(__dirname, '../build')));
+app.post('/createUser', feedController.createUser, (req, res) => {
+  res.status(200).end('User has been created');
+});
+
+app.post('/postJob', feedController.postJobs, (req, res) => {
+  res.status(200).end('hi qt');
+});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));

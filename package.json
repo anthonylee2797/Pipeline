@@ -28,6 +28,7 @@
     "@types/styled-components": "^5.1.2",
     "@types/uuid": "^8.3.0",
     "babel-polyfill": "^6.26.0",
+    "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
     "express": "^4.17.1",
     "loader": "^2.1.1",
