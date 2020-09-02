@@ -3,14 +3,7 @@ import { v4 as uuid } from 'uuid';
 import Column from './Column';
 import Job from './Job';
 import { useJob, setJobs } from '../Context/JobContext';
-import { CSS_COLOR_NAMES } from '../styles/colors.js';
-
-// Provider allows us to declare data that we want available throughout our component tree
-// Consumer allows any component in the component tree that needs that data to be able to subscribe to it
-
-let randomColor = () => {
-  return CSS_COLOR_NAMES[Math.floor(Math.random() * CSS_COLOR_NAMES.length)];
-};
+import { CSS_COLOR_NAMES, randomColor } from '../styles/colors.js';
 
 const Pipeline = () => {
   const companyNameEl = useRef(null);
@@ -18,6 +11,20 @@ const Pipeline = () => {
   const jobs = useJob();
   const setJobss = setJobs();
 
+  // Fetches data from database
+  useEffect(() => {
+    async function getData() {
+      let response = await fetch('/getjobs').then((data) => {
+        return data.json();
+      });
+      let jobsBE = JSON.parse(JSON.stringify(response.jobs));
+      setJobss(jobsBE);
+      console.log(jobs, 'now');
+    }
+    getData();
+  }, []);
+
+  // Adds job to screen
   async function addJob(e: any) {
     e.preventDefault();
     let company = companyNameEl.current.value;
@@ -29,6 +36,10 @@ const Pipeline = () => {
       id: uuid(),
       color: randomColor(),
     };
+
+    // resets form
+    companyNameEl.current.value = '';
+    roleNameEl.current.value = '';
 
     if (company && role) {
       setJobss(jobs.concat(data));
@@ -42,17 +53,6 @@ const Pipeline = () => {
       alert('Please enter Company Name and Role');
     }
   }
-  useEffect(() => {
-    async function getData() {
-      let response = await fetch('/getjobs').then((data) => {
-        return data.json();
-      });
-      let jobsBE = JSON.parse(JSON.stringify(response.jobs));
-      setJobss(jobsBE);
-      console.log(jobs, 'now');
-    }
-    getData();
-  }, []);
 
   return (
     <div className="main-container">

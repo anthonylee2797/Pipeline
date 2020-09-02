@@ -9,16 +9,38 @@ const ItemTypes = {
 };
 
 const JobComponent = styled('div')`
+  display: flex;
   color: black;
-  text-align: center;
+  text-align: left;
   border-radius: 10px;
   cursor: pointer;
   width: 80%;
   padding: 2px;
   background-color: ${(props) => props.color};
-  height: 100%;
+  height: 60%;
   margin: 10px auto;
   font-size: 15px;
+
+  .job-info {
+    font-weight: 800;
+    width: 80%;
+  }
+
+  .job-button {
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    margin: 5px 0px;
+    border-style: none;
+    background-color: #f63d3d;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s;
+  }
+  .job-button:hover {
+    background-color: rgba(239, 89, 50, 0.79);
+  }
 `;
 
 interface Props {
@@ -43,6 +65,7 @@ const Job = ({ company, status, id, role, color }: Props) => {
     }),
   });
 
+  // adds delete functionality
   async function deletes(jobid) {
     let copy = JSON.parse(JSON.stringify(jobs));
     copy.map((el) => {
@@ -61,9 +84,13 @@ const Job = ({ company, status, id, role, color }: Props) => {
 
   return (
     <JobComponent color={color} ref={drag}>
-      <h3>Company: {company}</h3>
-      <h3>Role:{role}</h3>
+      <div className="job-info">
+        <h3> Company: {company}</h3>
+        <h3>Role: {role}</h3>
+      </div>
+
       <button
+        className="job-button"
         onClick={() => {
           deletes(id);
         }}

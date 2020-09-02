@@ -13,3 +13,7 @@ export const CSS_COLOR_NAMES = [
   '#81SFB5',
   '#E49969',
 ];
+
+export const randomColor = () => {
+  return CSS_COLOR_NAMES[Math.floor(Math.random() * CSS_COLOR_NAMES.length)];
+};
