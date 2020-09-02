@@ -39,7 +39,7 @@ const Column = ({ columnName, children }: props) => {
     }),
   });
 
-  function changeStatus(id, newStatus) {
+  async function changeStatus(id, newStatus) {
     let copy = JSON.parse(JSON.stringify(jobs));
 
     let filteredList = copy.filter((el) => el.id !== id);
@@ -47,6 +47,11 @@ const Column = ({ columnName, children }: props) => {
     filteredItem[0].status = newStatus;
 
     setJobss([...filteredList, ...filteredItem]);
+    await fetch('/editJob', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify([...filteredList, ...filteredItem]),
+    });
   }
 
   return (

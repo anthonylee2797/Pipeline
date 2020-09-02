@@ -8,7 +8,9 @@ import { CSS_COLOR_NAMES } from '../styles/colors.js';
 // Provider allows us to declare data that we want available throughout our component tree
 // Consumer allows any component in the component tree that needs that data to be able to subscribe to it
 
-let randomColor = () => { return CSS_COLOR_NAMES[Math.floor(Math.random() * CSS_COLOR_NAMES.length)]}
+let randomColor = () => {
+  return CSS_COLOR_NAMES[Math.floor(Math.random() * CSS_COLOR_NAMES.length)];
+};
 
 const Pipeline = () => {
   const companyNameEl = useRef(null);
@@ -16,17 +18,41 @@ const Pipeline = () => {
   const jobs = useJob();
   const setJobss = setJobs();
 
-  function addJob(e: any) {
+  async function addJob(e: any) {
     e.preventDefault();
     let company = companyNameEl.current.value;
     let role = roleNameEl.current.value;
+    let data = {
+      company: company,
+      status: 'Applied',
+      role: role,
+      id: uuid(),
+      color: randomColor(),
+    };
 
     if (company && role) {
-      setJobss(jobs.concat({ company: company, status: 'Applied', role: role, id: uuid(), color: randomColor() }));
+      setJobss(jobs.concat(data));
+
+      await fetch('/postJob', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }).then((response) => response.json());
     } else {
       alert('Please enter Company Name and Role');
     }
   }
+  useEffect(() => {
+    async function getData() {
+      let response = await fetch('/getjobs').then((data) => {
+        return data.json();
+      });
+      let jobsBE = JSON.parse(JSON.stringify(response.jobs));
+      setJobss(jobsBE);
+      console.log(jobs, 'now');
+    }
+    getData();
+  }, []);
 
   return (
     <div className="main-container">
@@ -45,21 +71,39 @@ const Pipeline = () => {
           {jobs
             .filter((el: any) => el.status === 'Applied')
             .map((el: any) => (
-              <Job status={el.status} company={el.company} id={el.id} role={el.role} color={el.color} />
+              <Job
+                status={el.status}
+                company={el.company}
+                id={el.id}
+                role={el.role}
+                color={el.color}
+              />
             ))}
         </Column>
         <Column columnName="Phone">
           {jobs
             .filter((el: any) => el.status === 'Phone')
             .map((el: any) => (
-              <Job status={el.status} company={el.company} id={el.id} role={el.role} color={el.color} />
+              <Job
+                status={el.status}
+                company={el.company}
+                id={el.id}
+                role={el.role}
+                color={el.color}
+              />
             ))}
         </Column>
         <Column columnName="ON SITE">
           {jobs
             .filter((el: any) => el.status === 'ON SITE')
             .map((el: any) => (
-              <Job status={el.status} company={el.company} id={el.id} role={el.role} color={el.color} />
+              <Job
+                status={el.status}
+                company={el.company}
+                id={el.id}
+                role={el.role}
+                color={el.color}
+              />
             ))}
         </Column>
 
@@ -67,14 +111,26 @@ const Pipeline = () => {
           {jobs
             .filter((el: any) => el.status === 'Offer')
             .map((el: any) => (
-              <Job status={el.status} company={el.company} id={el.id} role={el.role} color={el.color} />
+              <Job
+                status={el.status}
+                company={el.company}
+                id={el.id}
+                role={el.role}
+                color={el.color}
+              />
             ))}
         </Column>
         <Column columnName="Rejected">
           {jobs
             .filter((el: any) => el.status === 'Rejected')
             .map((el: any) => (
-              <Job status={el.status} company={el.company} id={el.id} role={el.role} color={el.color} />
+              <Job
+                status={el.status}
+                company={el.company}
+                id={el.id}
+                role={el.role}
+                color={el.color}
+              />
             ))}
         </Column>
       </div>

@@ -30,8 +30,8 @@ interface Props {
 }
 
 const Job = ({ company, status, id, role, color }: Props) => {
-  // const jobs = useJob();
-  // const setJobss = setJobs();
+  const jobs = useJob();
+  const setJobss = setJobs();
 
   const [{ isDragging }, drag] = useDrag({
     item: {
@@ -43,10 +43,33 @@ const Job = ({ company, status, id, role, color }: Props) => {
     }),
   });
 
+  async function deletes(jobid) {
+    let copy = JSON.parse(JSON.stringify(jobs));
+    copy.map((el) => {
+      if (el.id === jobid) {
+        copy.splice(copy.indexOf(el), 1);
+      }
+    });
+    setJobss(copy);
+
+    await fetch('/editJob', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(copy),
+    });
+  }
+
   return (
     <JobComponent color={color} ref={drag}>
       <h3>Company: {company}</h3>
-      <h3>Role: {role}</h3>
+      <h3>Role:{role}</h3>
+      <button
+        onClick={() => {
+          deletes(id);
+        }}
+      >
+        Delete
+      </button>
     </JobComponent>
   );
 };

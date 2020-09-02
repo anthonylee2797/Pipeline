@@ -22,29 +22,7 @@ export function setJobs() {
 }
 
 export function JobProvider({ children }) {
-  const [jobs, setJobs] = useState([
-    {
-      company: 'Amazon',
-      status: 'Rejected',
-      role: 'Frontend Engineer',
-      id: uuid(),
-      color: randomColor(),
-    },
-    {
-      company: 'Microsoft',
-      status: 'Applied',
-      role: 'Backend Engineer',
-      id: uuid(),
-      color: randomColor(),
-    },
-    {
-      company: 'Apple',
-      status: 'Applied',
-      role: 'Backend Engineer',
-      id: uuid(),
-      color: randomColor(),
-    },
-  ]);
+  const [jobs, setJobs] = useState([]);
 
   return (
     <DndProvider backend={HTML5Backend}>

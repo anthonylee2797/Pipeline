@@ -1,25 +1,19 @@
 const { userModel } = require('../models/userModel');
 require('dotenv').config();
 
+let userId = '5f4978d7a8bea73158f351fe';
 const feedController = {
   getJobs(req, res, next) {
     console.log('getting jobs');
-    db.find()
-      .then((data) => {
-        console.log(data);
-        res.json(data);
-      })
-      .catch((err, res) => {
-        if (err) {
-          res.sendStatus(404);
-        } else {
-          res.sendStatus(200);
-        }
-      });
+
+    userModel.findById(userId).then((data) => {
+      res.json(data);
+    });
+    return next();
   },
   async postJobs(req, res, next) {
     console.log('posting Job');
-    let userId = '5f4978d7a8bea73158f351fe';
+
     const { company, status, role, id, color } = req.body;
 
     try {
@@ -42,6 +36,11 @@ const feedController = {
     } catch (e) {
       console.log('error posting job', e);
     }
+  },
+  async editJob(req, res, next) {
+    // const { jobs  = req.body;
+    const user = await userModel.findByIdAndUpdate(userId, { jobs: req.body });
+    return next();
   },
 
   createUser(req, res, next) {

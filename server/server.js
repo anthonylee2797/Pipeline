@@ -13,12 +13,20 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 
 const feedController = require('./controllers/feedController');
 
+app.get('/getjobs', feedController.getJobs, (req, res) => {
+  res.status(200);
+});
+
 app.post('/createUser', feedController.createUser, (req, res) => {
   res.status(200).end('User has been created');
 });
 
 app.post('/postJob', feedController.postJobs, (req, res) => {
-  res.status(200).end('hi qt');
+  res.status(200).end('Job has been posted');
+});
+
+app.put('/editJob', feedController.editJob, (req, res) => {
+  res.status(200).end('jobs have been edited');
 });
 
 app.get('*', (req, res) => {
