@@ -1,7 +1,7 @@
 const { userModel } = require('../models/userModel');
 require('dotenv').config();
 
-let userId = '5f4978d7a8bea73158f351fe';
+// let userId = '5f4978d7a8bea73158f351fe';
 const feedController = {
   getJobs(req, res, next) {
     console.log('getting jobs');
@@ -18,16 +18,10 @@ const feedController = {
 
     try {
       const user = await userModel.findByIdAndUpdate(
-        userId,
+        id,
         {
           $push: {
-            jobs: {
-              company,
-              status,
-              role,
-              id,
-              color,
-            },
+            jobs: { company, status, role, id, color },
           },
         },
         { new: true, upsert: true }
@@ -38,8 +32,8 @@ const feedController = {
     }
   },
   async editJob(req, res, next) {
-    // const { jobs  = req.body;
-    const user = await userModel.findByIdAndUpdate(userId, { jobs: req.body });
+    const { jobs, userId } = req.body;
+    const user = await userModel.findByIdAndUpdate(userId, { jobs: jobs });
     return next();
   },
 

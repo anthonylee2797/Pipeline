@@ -2,18 +2,21 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useJob, setJobs } from '../Context/JobContext';
 
-const Login = () => {
+const Signup = () => {
   const history = useHistory();
-  const jobs = useJob();
-  const setJobss = setJobs();
 
-  async function checkLogin(e) {
+  function login() {
+    history.push('/');
+  }
+
+  async function checkAccount(e) {
     e.preventDefault();
+
     let username = e.target.username.value;
     let password = e.target.password.value;
 
     try {
-      const data = await fetch('/checkUser', {
+      const data = await fetch('/createUser', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -21,32 +24,24 @@ const Login = () => {
         },
         body: JSON.stringify({ username: username, password: password }),
       });
-
-      const userInformation = await data.json();
-      setJobss(userInformation);
-      history.push('/pipeline');
+      alert('Account has been created');
+      history.push('/');
     } catch (e) {
-      alert('wrong username/password');
+      alert('username already exists');
     }
-  }
-
-  function signUp() {
-    history.push('/signup');
   }
 
   return (
     <div className="login">
-      <h1>Pipeline - Login</h1>
-      <form onSubmit={checkLogin} className="log-in">
+      <h1>Pipeline - Signup</h1>
+      <form onSubmit={checkAccount} className="log-in">
         <input name="username" placeholder="Username" type="text" />
         <input name="password" placeholder="Password" type="text" />
-        <button type="submit">Sign In</button>
-        <button type="button" onClick={signUp}>
-          Sign Up
-        </button>
+        <button type="submit">Create Account</button>
+        <button onClick={login}>Login</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

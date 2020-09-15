@@ -51,3 +51,49 @@
 .gray {
   color: rgba(25, 4, 69, 0.4);
 }
+
+.login {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: rgb(250, 249, 255);
+}
+
+.log-in input {
+  // display: flex;
+  // margin: 10px;
+  // text-align: center;
+
+  display: block;
+  width: 70%;
+  color: black;
+  margin: 5px auto;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.log-in button {
+  display: block;
+  width: 70%;
+  color: black;
+  border-style: none;
+  border: thin 1px black;
+  padding: 3px;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #e5eaf5;
+  margin-top: 5px;
+
+  &:hover {
+    cursor: pointer;
+    color: rgb(235, 15, 15);
+    transition: 0.3s;
+  }
+}

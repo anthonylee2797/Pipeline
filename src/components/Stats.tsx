@@ -9,7 +9,8 @@ const StatComponent = styled('div')`
 `;
 
 const Stats = () => {
-  const jobs = useJob();
+  const userInformation = useJob();
+  const jobs = userInformation.jobs;
   let offerCount = 0;
 
   jobs.forEach((job) => {
@@ -21,9 +22,8 @@ const Stats = () => {
   return (
     <StatComponent>
       <h1>Pipeline | Track your Job Applications</h1>
-      <h1>Total Jobs Applied: {jobs.length - 1} </h1>
-      {console.log(offerCount, 'offercount', jobs.length, 'jobs.length')}
-      <h1>Offer Conversion Rate: {Math.round((offerCount / (jobs.length - 1)) * 100)}%</h1>
+      <h1>Total Jobs Applied: {jobs.length} </h1>
+      <h1>Offer Conversion Rate: {Math.round((offerCount / jobs.length) * 100)}%</h1>
     </StatComponent>
   );
 };

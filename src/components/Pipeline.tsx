@@ -8,21 +8,11 @@ import { CSS_COLOR_NAMES, randomColor } from '../styles/colors.js';
 const Pipeline = () => {
   const companyNameEl = useRef(null);
   const roleNameEl = useRef(null);
-  const jobs = useJob();
+  const userInformation = useJob();
   const setJobss = setJobs();
 
-  // Fetches data from database
-  useEffect(() => {
-    async function getData() {
-      let response = await fetch('/getjobs').then((data) => {
-        return data.json();
-      });
-      let jobsBE = JSON.parse(JSON.stringify(response.jobs));
-      setJobss(jobsBE);
-      console.log(jobs, 'now');
-    }
-    getData();
-  }, []);
+  const userId = userInformation._id;
+  const jobs = userInformation.jobs;
 
   // Adds job to screen
   async function addJob(e: any) {
@@ -42,12 +32,12 @@ const Pipeline = () => {
     roleNameEl.current.value = '';
 
     if (company && role) {
-      setJobss(jobs.concat(data));
-
+      setJobss({ ...userInformation, jobs: jobs.concat(data) });
+      console.log(jobs.concat(data), ' jobs concat data');
       await fetch('/postJob', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, id: userId }),
       }).then((response) => response.json());
     } else {
       alert('Please enter Company Name and Role');

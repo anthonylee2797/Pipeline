@@ -52,7 +52,8 @@ interface Props {
 }
 
 const Job = ({ company, status, id, role, color }: Props) => {
-  const jobs = useJob();
+  const userInformation = useJob();
+  const jobs = userInformation.jobs;
   const setJobss = setJobs();
 
   const [{ isDragging }, drag] = useDrag({
@@ -73,12 +74,15 @@ const Job = ({ company, status, id, role, color }: Props) => {
         copy.splice(copy.indexOf(el), 1);
       }
     });
-    setJobss(copy);
+    setJobss({ ...userInformation, jobs: copy });
 
     await fetch('/editJob', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(copy),
+      body: JSON.stringify({
+        jobs: copy,
+        userId: userInformation._id,
+      }),
     });
   }
 

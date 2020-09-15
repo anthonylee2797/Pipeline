@@ -8,13 +8,10 @@ app.use(express.json());
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 const feedController = require('./controllers/feedController');
+const authController = require('./controllers/authController');
 
 app.get('/getjobs', feedController.getJobs, (req, res) => {
   res.status(200);
-});
-
-app.post('/createUser', feedController.createUser, (req, res) => {
-  res.status(200).end('User has been created');
 });
 
 app.post('/postJob', feedController.postJobs, (req, res) => {
@@ -23,6 +20,15 @@ app.post('/postJob', feedController.postJobs, (req, res) => {
 
 app.put('/editJob', feedController.editJob, (req, res) => {
   res.status(200).end('jobs have been edited');
+});
+
+// authorization
+app.post('/createUser', authController.createUser, (req, res) => {
+  res.status(200).end('User has been created');
+});
+
+app.post('/checkUser', authController.checkUser, (req, res) => {
+  res.status(200).end('User has signed in');
 });
 
 app.get('*', (req, res) => {

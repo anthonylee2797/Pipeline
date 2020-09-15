@@ -28,7 +28,8 @@ interface props {
 }
 
 const Column = ({ columnName, children }: props) => {
-  const jobs = useJob();
+  const userInformation = useJob();
+  const jobs = userInformation.jobs;
   const setJobss = setJobs();
 
   const [{ isOver }, drop] = useDrop({
@@ -46,11 +47,14 @@ const Column = ({ columnName, children }: props) => {
     let filteredItem = copy.filter((el) => el.id === id);
     filteredItem[0].status = newStatus;
 
-    setJobss([...filteredList, ...filteredItem]);
+    setJobss({ ...userInformation, jobs: [...filteredList, ...filteredItem] });
     await fetch('/editJob', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify([...filteredList, ...filteredItem]),
+      body: JSON.stringify({
+        jobs: [...filteredList, ...filteredItem],
+        userId: userInformation._id,
+      }),
     });
   }
 

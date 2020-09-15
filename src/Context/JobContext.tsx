@@ -22,7 +22,7 @@ export function setJobs() {
 }
 
 export function JobProvider({ children }) {
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState({});
 
   return (
     <DndProvider backend={HTML5Backend}>
