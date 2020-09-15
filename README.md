@@ -6,6 +6,8 @@ Pipeline is a Job application tracker that keeps your job search organized.
 
 This job application tracker is similar to a SCRUM board where users can sign in and view and track their job search. This application utilizes drag and drop functionality to offer a seamless & modern experience for the end user.
 
+![](/assets/pipeline.gif)
+
 ### Installing
 
 - Fork & Download this repo
