@@ -32,8 +32,10 @@ const Pipeline = () => {
     roleNameEl.current.value = '';
 
     if (company && role) {
+      // changes state in JobContext
       setJobss({ ...userInformation, jobs: jobs.concat(data) });
-      console.log(jobs.concat(data), ' jobs concat data');
+
+      // makes changes to server
       await fetch('/postJob', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -56,6 +58,7 @@ const Pipeline = () => {
         <button type="submit">Add Application</button>
       </form>
 
+      {/* Column for Each Phase of Application */}
       <div className="main-container-columns">
         <Column columnName="Applied">
           {jobs
@@ -70,6 +73,7 @@ const Pipeline = () => {
               />
             ))}
         </Column>
+
         <Column columnName="Phone">
           {jobs
             .filter((el: any) => el.status === 'Phone')
@@ -83,6 +87,7 @@ const Pipeline = () => {
               />
             ))}
         </Column>
+
         <Column columnName="ON SITE">
           {jobs
             .filter((el: any) => el.status === 'ON SITE')
@@ -110,6 +115,7 @@ const Pipeline = () => {
               />
             ))}
         </Column>
+
         <Column columnName="Rejected">
           {jobs
             .filter((el: any) => el.status === 'Rejected')

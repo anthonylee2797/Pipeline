@@ -4,16 +4,13 @@ require('dotenv').config();
 // let userId = '5f4978d7a8bea73158f351fe';
 const feedController = {
   getJobs(req, res, next) {
-    console.log('getting jobs');
-
     userModel.findById(userId).then((data) => {
       res.json(data);
     });
     return next();
   },
-  async postJobs(req, res, next) {
-    console.log('posting Job');
 
+  async postJobs(req, res, next) {
     const { company, status, role, id, color } = req.body;
 
     try {

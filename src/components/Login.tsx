@@ -7,6 +7,10 @@ const Login = () => {
   const jobs = useJob();
   const setJobss = setJobs();
 
+  function signUp() {
+    history.push('/signup');
+  }
+
   async function checkLogin(e) {
     e.preventDefault();
     let username = e.target.username.value;
@@ -30,13 +34,9 @@ const Login = () => {
     }
   }
 
-  function signUp() {
-    history.push('/signup');
-  }
-
   return (
     <div className="login">
-      <h1>Pipeline - Login</h1>
+      <h1>Pipeline</h1>
       <form onSubmit={checkLogin} className="log-in">
         <input name="username" placeholder="Username" type="text" />
         <input name="password" placeholder="Password" type="text" />

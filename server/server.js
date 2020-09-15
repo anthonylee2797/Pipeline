@@ -10,6 +10,7 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 const feedController = require('./controllers/feedController');
 const authController = require('./controllers/authController');
 
+//  pipeline functionality
 app.get('/getjobs', feedController.getJobs, (req, res) => {
   res.status(200);
 });
