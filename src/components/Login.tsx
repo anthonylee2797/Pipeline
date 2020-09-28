@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useJob, setJobs } from '../Context/JobContext';
+import { usePipeline, setPipeline } from '../Context/JobContext';
 
 const Login = () => {
   const history = useHistory();
-  const jobs = useJob();
-  const setJobss = setJobs();
+  const setPipelineState = setPipeline();
 
   function signUp() {
     history.push('/signup');
@@ -27,7 +26,7 @@ const Login = () => {
       });
 
       const userInformation = await data.json();
-      setJobss(userInformation);
+      setPipelineState(userInformation);
       history.push('/pipeline');
     } catch (e) {
       alert('wrong username/password');
@@ -41,9 +40,7 @@ const Login = () => {
         <input name="username" placeholder="Username" type="text" />
         <input name="password" placeholder="Password" type="text" />
         <button type="submit">Sign In</button>
-        <button type="button" onClick={signUp}>
-          Sign Up
-        </button>
+        <button type="button" onClick={signUp}>Sign Up</button>
       </form>
     </div>
   );

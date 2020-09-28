@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { useJob, setJobs } from '../Context/JobContext';
+import { usePipeline, setPipeline } from '../Context/JobContext';
 
 const Wrapper = styled.div<OtherDataWrapperType>`
   height: 100vh;
@@ -28,9 +28,9 @@ interface props {
 }
 
 const Column = ({ columnName, children }: props) => {
-  const userInformation = useJob();
+  const userInformation = usePipeline();
   const jobs = userInformation.jobs;
-  const setJobss = setJobs();
+  const setPipelineState = setPipeline();
 
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -47,7 +47,7 @@ const Column = ({ columnName, children }: props) => {
     let filteredItem = copy.filter((el) => el.id === id);
     filteredItem[0].status = newStatus;
 
-    setJobss({ ...userInformation, jobs: [...filteredList, ...filteredItem] });
+    setPipelineState({ ...userInformation, jobs: [...filteredList, ...filteredItem] });
     await fetch('/editJob', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

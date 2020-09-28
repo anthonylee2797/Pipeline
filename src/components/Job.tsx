@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { render } from 'react-dom';
-import { useJob, setJobs } from '../Context/JobContext';
+import { usePipeline, setPipeline } from '../Context/JobContext';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 
 const ItemTypes = {
@@ -52,9 +52,9 @@ interface Props {
 }
 
 const Job = ({ company, status, id, role, color }: Props) => {
-  const userInformation = useJob();
+  const userInformation = usePipeline();
   const jobs = userInformation.jobs;
-  const setJobss = setJobs();
+  const setPipelineState = setPipeline();
 
   const [{ isDragging }, drag] = useDrag({
     item: {
@@ -74,7 +74,7 @@ const Job = ({ company, status, id, role, color }: Props) => {
         copy.splice(copy.indexOf(el), 1);
       }
     });
-    setJobss({ ...userInformation, jobs: copy });
+    setPipelineState({ ...userInformation, jobs: copy });
 
     await fetch('/editJob', {
       method: 'PUT',
@@ -101,6 +101,7 @@ const Job = ({ company, status, id, role, color }: Props) => {
       >
         Delete
       </button>
+
     </JobComponent>
   );
 };

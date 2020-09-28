@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useJob, setJobs } from '../Context/JobContext';
 
 const Signup = () => {
   const history = useHistory();

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, createContext } from 'react';
 import styled from 'styled-components';
-import { useJob, setJobs } from '../Context/JobContext';
+import { usePipeline } from '../Context/JobContext';
 
 const StatComponent = styled('div')`
   width: 50%;
@@ -9,7 +9,7 @@ const StatComponent = styled('div')`
 `;
 
 const Stats = () => {
-  const userInformation = useJob();
+  const userInformation = usePipeline();
   const jobs = userInformation.jobs;
   let offerCount = 0;
 

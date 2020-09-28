@@ -35,8 +35,6 @@ const feedController = {
   },
 
   createUser(req, res, next) {
-    console.log('creating user');
-
     const { username, password } = req.body;
 
     // res.locals.password = req.body.password;

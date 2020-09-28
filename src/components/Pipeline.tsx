@@ -2,17 +2,18 @@ import React, { useEffect, useRef, useState, createContext, useContext } from 'r
 import { v4 as uuid } from 'uuid';
 import Column from './Column';
 import Job from './Job';
-import { useJob, setJobs } from '../Context/JobContext';
+import { usePipeline, setPipeline } from '../Context/JobContext';
 import { CSS_COLOR_NAMES, randomColor } from '../styles/colors.js';
 
 const Pipeline = () => {
   const companyNameEl = useRef(null);
   const roleNameEl = useRef(null);
-  const userInformation = useJob();
-  const setJobss = setJobs();
+  const userInformation = usePipeline();
+  const setPipelineState = setPipeline();
 
   const userId = userInformation._id;
   const jobs = userInformation.jobs;
+  const columns = ['Applied', 'Phone', 'On Site', 'Offer', 'Rejected']
 
   // Adds job to screen
   async function addJob(e: any) {
@@ -33,7 +34,7 @@ const Pipeline = () => {
 
     if (company && role) {
       // changes state in JobContext
-      setJobss({ ...userInformation, jobs: jobs.concat(data) });
+      setPipelineState({ ...userInformation, jobs: jobs.concat(data) });
 
       // makes changes to server
       await fetch('/postJob', {
@@ -45,6 +46,7 @@ const Pipeline = () => {
       alert('Please enter Company Name and Role');
     }
   }
+
 
   return (
     <div className="main-container">
@@ -59,8 +61,29 @@ const Pipeline = () => {
       </form>
 
       {/* Column for Each Phase of Application */}
+
+
       <div className="main-container-columns">
-        <Column columnName="Applied">
+
+        {columns.map((column) => {
+          return (
+            <Column columnName={column}>
+              {jobs
+                .filter((el: any) => el.status === column)
+                .map((el: any) => (
+                  <Job
+                    status={el.status}
+                    company={el.company}
+                    id={el.id}
+                    role={el.role}
+                    color={el.color}
+                  />
+                ))}
+            </Column>
+          )
+        })}
+
+        {/* <Column columnName="Applied">
           {jobs
             .filter((el: any) => el.status === 'Applied')
             .map((el: any) => (
@@ -128,7 +151,7 @@ const Pipeline = () => {
                 color={el.color}
               />
             ))}
-        </Column>
+        </Column> */}
       </div>
     </div>
   );

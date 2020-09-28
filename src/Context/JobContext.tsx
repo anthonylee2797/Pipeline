@@ -13,21 +13,21 @@ let randomColor = () => {
   return CSS_COLOR_NAMES[Math.floor(Math.random() * CSS_COLOR_NAMES.length)];
 };
 
-export function useJob() {
+export function usePipeline() {
   return useContext(JobContext);
 }
 
-export function setJobs() {
+export function setPipeline() {
   return useContext(JobUpdateContext);
 }
 
 export function JobProvider({ children }) {
-  const [jobs, setJobs] = useState({});
+  const [pipeline, setPipeline] = useState({});
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <JobContext.Provider value={jobs}>
-        <JobUpdateContext.Provider value={setJobs}>{children}</JobUpdateContext.Provider>
+      <JobContext.Provider value={pipeline}>
+        <JobUpdateContext.Provider value={setPipeline}>{children}</JobUpdateContext.Provider>
       </JobContext.Provider>
     </DndProvider>
   );
