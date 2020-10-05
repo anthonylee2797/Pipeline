@@ -32,6 +32,8 @@ app.post('/checkUser', authController.checkUser, (req, res) => {
   res.status(200).end('User has signed in');
 });
 
+app.use(express.static('client/build'))
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 });

@@ -4,12 +4,14 @@ import Column from './Column';
 import Job from './Job';
 import { usePipeline, setPipeline } from '../Context/JobContext';
 import { CSS_COLOR_NAMES, randomColor } from '../styles/colors.js';
+import { Link, useHistory } from 'react-router-dom';
 
 const Pipeline = () => {
   const companyNameEl = useRef(null);
   const roleNameEl = useRef(null);
   const userInformation = usePipeline();
   const setPipelineState = setPipeline();
+  const history = useHistory();
 
   const userId = userInformation._id;
   const jobs = userInformation.jobs;
@@ -47,6 +49,11 @@ const Pipeline = () => {
     }
   }
 
+  if (Object.keys(userInformation).length === 0) {
+    alert('Please login again')
+    history.push('/login')
+    return null
+  }
 
   return (
     <div className="main-container">
@@ -64,7 +71,6 @@ const Pipeline = () => {
 
 
       <div className="main-container-columns">
-
         {columns.map((column) => {
           return (
             <Column columnName={column}>
@@ -82,76 +88,6 @@ const Pipeline = () => {
             </Column>
           )
         })}
-
-        {/* <Column columnName="Applied">
-          {jobs
-            .filter((el: any) => el.status === 'Applied')
-            .map((el: any) => (
-              <Job
-                status={el.status}
-                company={el.company}
-                id={el.id}
-                role={el.role}
-                color={el.color}
-              />
-            ))}
-        </Column>
-
-        <Column columnName="Phone">
-          {jobs
-            .filter((el: any) => el.status === 'Phone')
-            .map((el: any) => (
-              <Job
-                status={el.status}
-                company={el.company}
-                id={el.id}
-                role={el.role}
-                color={el.color}
-              />
-            ))}
-        </Column>
-
-        <Column columnName="ON SITE">
-          {jobs
-            .filter((el: any) => el.status === 'ON SITE')
-            .map((el: any) => (
-              <Job
-                status={el.status}
-                company={el.company}
-                id={el.id}
-                role={el.role}
-                color={el.color}
-              />
-            ))}
-        </Column>
-
-        <Column columnName="Offer">
-          {jobs
-            .filter((el: any) => el.status === 'Offer')
-            .map((el: any) => (
-              <Job
-                status={el.status}
-                company={el.company}
-                id={el.id}
-                role={el.role}
-                color={el.color}
-              />
-            ))}
-        </Column>
-
-        <Column columnName="Rejected">
-          {jobs
-            .filter((el: any) => el.status === 'Rejected')
-            .map((el: any) => (
-              <Job
-                status={el.status}
-                company={el.company}
-                id={el.id}
-                role={el.role}
-                color={el.color}
-              />
-            ))}
-        </Column> */}
       </div>
     </div>
   );
